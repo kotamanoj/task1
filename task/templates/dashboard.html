@@ -1,0 +1,60 @@
+{%  extends 'main.html' %}
+{% block content %}
+
+
+<br>
+<div class="jumbotron w-25 p-3 text-uppercase font-weight-bold " style="background:transparent !important">
+	Welcome to {{request.user}} monthly expenses
+</div>
+<hr>
+<div class="row text-center">
+	<div class="col-md-5">
+		<h5>Enter Monthly Expenses</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="">Create Customer</a>
+			<hr>
+			<form method="POST" action="">
+						{% csrf_token %}
+				<div class="form-group"><label> Date :</label> {{form.date}}</div>
+				<div class="form-group"><label> Description:</label> {{form.description}}</div>
+				<div class="form-group"><label> Amount:</label> {{form.amount}}</div>
+				<input class="btn login_btn btn-primary" type="submit" value="Save">
+			</form>
+
+
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<h5>View Monthly Expenses</h5>
+		<hr>
+		<div class="card card-body">
+
+			<table class="table table-sm">
+				<tr>
+					<th class="bg-primary">Date</th>
+					<th class="bg-primary">Description</th>
+					<th class="bg-primary">Amount</th>
+				</tr>
+				{% for i in customers %}
+				<tr>
+
+						<td>{{i.date}}</td>
+						<td>{{i.description}}</td>
+						<td>{{i.amount}}</td>
+				</tr>
+				{% endfor %}
+				<hr>
+
+
+			</table>
+			<hr>
+			<h2>Total Montly Amount : {{total_amount}}</h2>
+		</div>
+	</div>
+
+</div>
+
+
+{% endblock %}
